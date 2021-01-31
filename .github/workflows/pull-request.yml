@@ -19,4 +19,8 @@ jobs:
         with:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
-      - run: npm run docker:build-prod
+      - run: npm install
+
+      - run: npm run lint
+
+      - run: npm run test
