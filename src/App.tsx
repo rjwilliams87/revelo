@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+var a = "b" // testing husky setup
+
 function App() {
   return (
     <div className="App">
