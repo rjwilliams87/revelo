@@ -8,7 +8,6 @@ ENV PATH="./node_modules/.bin:$PATH"
 
 COPY . ./
 RUN npm run build
-RUN npm run lint
 
 FROM nginx:1.17-alpine
 RUN apk --no-cache add curl
