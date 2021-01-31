@@ -3,13 +3,13 @@ FROM node:15.7.0-alpine AS builder
 WORKDIR /opt/web
 COPY package.json package-lock.json ./
 RUN npm ci
+RUN npm run lint
+RUN npm run test
 
 ENV PATH="./node_modules/.bin:$PATH"
 
 COPY . ./
 RUN npm run build
-RUN npm run lint
-RUN npm run test
 
 FROM nginx:1.17-alpine
 RUN apk --no-cache add curl
