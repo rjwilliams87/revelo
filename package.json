@@ -67,7 +67,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
-      "./node_modules/.bin/eslint --fix",
+      "eslint --cache --fix",
       "git add"
     ]
   }

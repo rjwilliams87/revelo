@@ -4,6 +4,7 @@ import './App.css';
 
 var a = "b" // testing husky setup
 var b = "a"
+var c ="a"
 
 function App() {
   return (
