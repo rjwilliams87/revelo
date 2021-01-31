@@ -3,8 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 var a = "b" // testing husky setup
-var b = "a"
-var c ="a"
+var b = "a";
 
 function App() {
   return (
