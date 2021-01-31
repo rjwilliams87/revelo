@@ -19,4 +19,4 @@ jobs:
         with:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
-      - run: npm docker:build-prod
+      - run: npm run docker:build-prod
