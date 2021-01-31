@@ -17,10 +17,17 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
+    "coverage": "react-scripts test --coverage",
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "docker:dev": "npm run docker:build-dev && npm run docker:run-dev",
+    "docker:prod": "npm run docker:build-prod && npm run docker:run-prod",
+    "docker:build-dev": "docker build -f Dockerfile.dev -t revelo:dev .",
+    "docker:build-prod": "docker build -f Dockerfile -t revelo:prod .",
+    "docker:run-dev": "docker run --publish 3000:3000 revelo:dev",
+    "docker:run-prod": "docker run --publish 3000:80 revelo:prod"
   },
   "eslintConfig": {
     "extends": [
