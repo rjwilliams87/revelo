@@ -4,7 +4,7 @@ on:
   release:
     branches:
       - main
-    type: [published, created, edited]
+    type: [published]
 
 jobs:
   build:
