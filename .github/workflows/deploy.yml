@@ -12,6 +12,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Conventional Changelog Action
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          output-file: false
+
       - name: Login to Heroku container registry
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
