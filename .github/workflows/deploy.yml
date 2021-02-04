@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+
       - name: Conventional Changelog Action
         uses: TriPSs/conventional-changelog-action@v3
         with:
@@ -26,8 +28,6 @@ jobs:
           tag_name: ${{ steps.changelog.outputs.tag }}
           release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
-
-      - uses: actions/checkout@v2
 
       - name: Login to Heroku container registry
         env:
