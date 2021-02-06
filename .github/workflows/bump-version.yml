@@ -16,7 +16,7 @@ jobs:
         uses: TriPSs/conventional-changelog-action@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          preset: 'react'
+          preset: 'angular'
           output-file: 'false'
 
       - run: echo ${{ steps.changelog.outputs.version }}
