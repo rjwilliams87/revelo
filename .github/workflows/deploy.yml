@@ -18,9 +18,9 @@ jobs:
         uses: TriPSs/conventional-changelog-action@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          preset: 'angular'
           output-file: 'false'
-
-      - run: echo ${{ steps.changelog.outputs }}
+          tag-prefix: 'v'
 
       - name: Create Release
         uses: actions/create-release@v1
