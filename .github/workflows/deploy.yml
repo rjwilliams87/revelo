@@ -20,8 +20,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           output-file: 'false'
 
-      - run: echo ${{ steps.changelog.outputs }}
-
       - name: Create Release
         uses: actions/create-release@v1
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
