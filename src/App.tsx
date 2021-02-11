@@ -7,7 +7,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { lightTheme } from './theme/light';
 
 const useStyles = makeStyles((theme: Theme) => {
-  console.log('THEME = ', theme);
   return createStyles({
     root: {
       background: theme.background.primary,
