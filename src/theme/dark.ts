@@ -2,19 +2,19 @@ import { createTheme } from './factory';
 import { colors } from './colors';
 
 const text = {
-  main: colors.black.main,
-  light: colors.grey.light,
-  dark: colors.black.main,
+  main: colors.white.main,
+  light: colors.white.main,
+  dark: colors.white.main,
 };
 
 const background = {
-  main: colors.white.main,
-  dark: colors.grey.main,
-  light: colors.grey.main,
+  main: colors.grey.main,
+  dark: colors.grey.dark,
+  light: colors.grey.light,
 };
 
 const palette = {
-  primary: { ...colors.red },
+  primary: { ...colors.red, contrastText: colors.white.main },
   secondary: { ...colors.green },
   warning: { ...colors.yellow },
   info: { ...colors.blue },
@@ -39,4 +39,4 @@ const overrides = {
 };
 
 const theme = { palette, overrides };
-export const lightTheme = createTheme({ background, text })(theme);
+export const darkTheme = createTheme({ background, text })(theme);

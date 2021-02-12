@@ -1,25 +1,55 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import { Theme, ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 
+/* 
+  augment @material-ui Theme interface
+  in order to add custom fields to theme
+  see: https://www.typescriptlang.org/docs/handbook/declaration-merging.html
+*/
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
     background: {
-      primary: React.CSSProperties['color'];
+      main: React.CSSProperties['color'];
+      light?: React.CSSProperties['color'];
+      dark?: React.CSSProperties['color'];
+    };
+    text: {
+      main: React.CSSProperties['color'];
+      light?: React.CSSProperties['color'];
+      dark?: React.CSSProperties['color'];
     };
   }
   // allow configuration using `createMuiTheme`
   interface ThemeOptions {
     background?: {
-      primary?: React.CSSProperties['color'];
+      main?: React.CSSProperties['color'];
+      light?: React.CSSProperties['color'];
+      dark?: React.CSSProperties['color'];
+    };
+    text?: {
+      main?: React.CSSProperties['color'];
+      light?: React.CSSProperties['color'];
+      dark?: React.CSSProperties['color'];
     };
   }
 }
 
-export const createTheme = (customOptions: { background: Record<string, string> }) => (
-  options: ThemeOptions,
-): Theme => {
+interface CreateThemeOptions {
+  background: {
+    main: string;
+    light?: string;
+    dark?: string;
+  };
+  text: {
+    main: string;
+    light?: string;
+    dark?: string;
+  };
+}
+
+export const createTheme = (customOptions: CreateThemeOptions) => (options: ThemeOptions): Theme => {
   return createMuiTheme({
-    background: customOptions?.background,
+    ...customOptions,
     ...options,
   });
 };
