@@ -5,10 +5,28 @@ import { AppProps } from '../app.types';
 import { lightTheme } from '../theme/light';
 import { darkTheme } from '../theme/dark';
 
-const ThemeStateContext = React.createContext(darkTheme);
-const ThemeDispatchContext = React.createContext(null);
+export enum ThemeType {
+  light = 'light',
+  dark = 'dark',
+}
 
-const useThemeState = (): Theme => {
+export interface ThemeAction {
+  type: ThemeType;
+}
+
+export interface ThemeState {
+  theme: Theme;
+  type: ThemeType;
+}
+
+export interface WithThemeProps extends AppProps {
+  displayName?: string;
+}
+
+const ThemeStateContext = React.createContext({ theme: darkTheme, type: ThemeType.dark });
+const ThemeDispatchContext = React.createContext<React.Dispatch<ThemeAction> | null>(null);
+
+export const useThemeState = (): ThemeState => {
   const context = useContext(ThemeStateContext);
 
   if (!context) {
@@ -18,7 +36,7 @@ const useThemeState = (): Theme => {
   return context;
 };
 
-const useThemeDispatch = (): React.DispatchWithoutAction => {
+export const useThemeDispatch = (): React.Dispatch<ThemeAction> => {
   const context = useContext(ThemeDispatchContext);
 
   if (!context) {
@@ -28,26 +46,26 @@ const useThemeDispatch = (): React.DispatchWithoutAction => {
   return context;
 };
 
-enum ActionType {
-  light = 'light',
-  dark = 'dark',
-}
-
-interface ReducerAction {
-  type: ActionType;
-}
-
-const themeReducer: React.Reducer<Theme, ReducerAction> = (state: Theme, action: ReducerAction) => {
+const themeReducer: React.Reducer<ThemeState, ThemeAction> = (state: ThemeState, action: ThemeAction) => {
   const handlers = {
-    light: lightTheme,
-    dark: darkTheme,
+    light: {
+      theme: lightTheme,
+      type: ThemeType.light,
+    },
+    dark: {
+      theme: darkTheme,
+      type: ThemeType.dark,
+    },
   };
 
   return handlers[action.type] || state;
 };
 
-const ThemeContext: React.FC = ({ children }: AppProps) => {
-  const [state, dispatch] = useReducer<React.Reducer<Theme, ReducerAction>>(themeReducer, darkTheme);
+export const ThemeContext: React.FC = ({ children }: AppProps) => {
+  const [state, dispatch] = useReducer<React.Reducer<ThemeState, ThemeAction>>(themeReducer, {
+    theme: darkTheme,
+    type: ThemeType.dark,
+  });
 
   return (
     <ThemeStateContext.Provider value={state}>
@@ -56,4 +74,18 @@ const ThemeContext: React.FC = ({ children }: AppProps) => {
   );
 };
 
-export { ThemeContext, useThemeState, useThemeDispatch };
+export const withTheme = <P extends WithThemeProps>(Component: React.ComponentType<P>): React.ComponentType<P> => {
+  const displayName = Component?.displayName || 'Component';
+
+  const ComponentWithTheme = (props: P) => {
+    return (
+      <ThemeContext>
+        <Component {...(props as P)} />
+      </ThemeContext>
+    );
+  };
+
+  ComponentWithTheme.displayName = `withTheme${displayName}`;
+
+  return ComponentWithTheme;
+};

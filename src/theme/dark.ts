@@ -14,7 +14,7 @@ const background = {
 };
 
 const palette = {
-  primary: { ...colors.red, contrastText: colors.white.main },
+  primary: { ...colors.green, contrastText: colors.white.main },
   secondary: { ...colors.green },
   warning: { ...colors.yellow },
   info: { ...colors.blue },
