@@ -1,13 +1,14 @@
 import React from 'react';
+import { Box } from '@material-ui/core';
 
 import { AppProps } from '../../app.types';
 import { Background } from '../Background';
-import { ToggleTheme } from '../ToggleTheme';
+import { Banner } from '../Banner';
 
 export const Layout: React.FC = ({ children }: AppProps) => {
   return (
     <Background>
-      <ToggleTheme />
+      <Banner />
       {children}
     </Background>
   );

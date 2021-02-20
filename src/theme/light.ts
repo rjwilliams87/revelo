@@ -8,13 +8,13 @@ const text = {
 };
 
 const background = {
-  main: colors.white.main,
+  main: '#fafbfd',
   dark: colors.grey.main,
   light: colors.grey.main,
 };
 
 const palette = {
-  primary: { ...colors.red },
+  primary: { ...colors.purple },
   secondary: { ...colors.green },
   warning: { ...colors.yellow },
   info: { ...colors.blue },

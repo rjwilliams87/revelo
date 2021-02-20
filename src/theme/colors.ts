@@ -28,6 +28,10 @@ export const yellow = {
   dark: '#b2a14c',
 };
 
+export const purple = {
+  main: '#765CEB',
+};
+
 export const white = {
   main: '#fff',
 };
@@ -42,6 +46,7 @@ export const colors = {
   blue,
   grey,
   yellow,
+  purple,
   white,
   black,
 };
